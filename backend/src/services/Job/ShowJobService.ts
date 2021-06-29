@@ -1,3 +1,4 @@
+import { createQueryBuilder } from 'typeorm';
 import Job from '../../models/Job';
 import IJobRepository from '../../repositories/IJobRepository'
 

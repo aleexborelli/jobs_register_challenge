@@ -1,9 +1,9 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import api from "../../services/api";
-import { format, parseISO } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import api from '../../services/api';
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-import styles from "./jobs.module.scss";
+import styles from './jobs.module.scss';
 
 type Job = {
   id: string;
@@ -21,15 +21,21 @@ type JobProps = {
 
 export default function Job({ job }: JobProps) {
   return (
-    <div className={styles.episode}>
+    <div className={styles.job}>
       <header>
         <h1>{job.title}</h1>
         <span>{job.employer_name}</span>
         <span>Published: {job.created_at}</span>
       </header>
 
-      <div className={styles.description} dangerouslySetInnerHTML={{ __html: job.description }} />
-      <div className={styles.description} dangerouslySetInnerHTML={{ __html: job.requirements }} />
+      <div
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: job.description }}
+      />
+      <div
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: job.requirements }}
+      />
     </div>
   );
 }
@@ -37,7 +43,7 @@ export default function Job({ job }: JobProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 };
 
@@ -53,9 +59,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     employer_name: data.employer_name,
     requirements: data.requirements,
     pay_range: data.pay_range,
-    created_at: format(parseISO(data.created_at), "dd/MM/yyyy", {
+    created_at: format(parseISO(data.created_at), 'dd/MM/yyyy', {
       locale: ptBR,
-    })
+    }),
   };
 
   return {
